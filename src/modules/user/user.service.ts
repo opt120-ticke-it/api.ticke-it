@@ -25,7 +25,7 @@ export const register = async(input: RegisterInput) => {
     throw new Error('Usuário já existe com este e-mail.');
   }
 
-  const hashedPassword = hashPassword(password);
+  const hashedPassword = await hashPassword(password);
 
   const newUser = await prisma.user.create({
     data: {
