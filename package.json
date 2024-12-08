@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "ts-node src/index.ts --whatch",
     "clean": "rm -rf node_modules coverage dist .nyc_output",
