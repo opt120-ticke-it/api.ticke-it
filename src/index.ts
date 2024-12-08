@@ -1,14 +1,15 @@
-import express, { Request, Response } from 'express';
-import { env } from './config/env';
+import express from 'express';
+import dotenv from 'dotenv';
+import userRoutes from './modules/user/user.routes';
 
-const PORT = env.PORT || 3334;
+dotenv.config();
 
 const app = express();
+app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Tá rodando!');
-});
+app.use('/users', userRoutes);
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

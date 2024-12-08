@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,99 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int        @id @default(autoincrement())
+  name                String
+  email               String     @unique
+  password            String
+  createdAt           DateTime   @default(now())
+  userType            UserType
+  tickets             Ticket[]   @relation("UserTickets")
+  transfers           Transfer[] @relation("TransfersOrigin")
+  receivedTransfers   Transfer[] @relation("TransfersDestination")
+  orders              Order[]    @relation("UserOrders")
+  organizedEvents     Event[]    @relation("OrganizerEvents")
+}
+
+model Event {
+  id           Int        @id @default(autoincrement())
+  name         String
+  description  String
+  startDate    DateTime
+  endDate      DateTime
+  location     String
+  createdAt    DateTime   @default(now())
+  organizerId  Int
+  organizer    User       @relation("OrganizerEvents", fields: [organizerId], references: [id])
+  tickets      Ticket[]   @relation("EventTickets")
+  orders       Order[]
+  ticketTypes  TicketType[] @relation("EventTicketTypes")
+}
+
+model Ticket {
+  id            Int          @id @default(autoincrement())
+  qrCode        String
+  status        TicketStatus
+  ticketTypeId  Int
+  orderId       Int?
+  userId        Int
+  eventId       Int?
+  user          User         @relation("UserTickets", fields: [userId], references: [id])
+  event         Event?       @relation("EventTickets", fields: [eventId], references: [id])
+  order         Order?       @relation("OrderTickets", fields: [orderId], references: [id])
+  ticketType    TicketType   @relation("TicketTypeTickets", fields: [ticketTypeId], references: [id])
+  transfers     Transfer[]   @relation("TicketTransfers")
+}
+
+model TicketType {
+  id              Int          @id @default(autoincrement())
+  name            String
+  totalQuantity   Int
+  availableQuantity Int
+  price           Float
+  eventId         Int
+  event           Event        @relation("EventTicketTypes", fields: [eventId], references: [id])
+  tickets         Ticket[]     @relation("TicketTypeTickets")
+}
+
+model Transfer {
+  id               Int      @id @default(autoincrement())
+  originUserId     Int
+  destinationUserId Int
+  ticketId         Int
+  transferDate     DateTime
+  originUser       User     @relation("TransfersOrigin", fields: [originUserId], references: [id])
+  destinationUser  User     @relation("TransfersDestination", fields: [destinationUserId], references: [id])
+  ticket           Ticket   @relation("TicketTransfers", fields: [ticketId], references: [id])
+}
+
+model Order {
+  id          Int      @id @default(autoincrement())
+  totalAmount Float
+  status      OrderStatus
+  userId      Int
+  eventId     Int
+  user        User     @relation("UserOrders", fields: [userId], references: [id])
+  event       Event    @relation(fields: [eventId], references: [id])
+  tickets     Ticket[] @relation("OrderTickets")
+}
+
+enum UserType {
+  CLIENTE
+  ORGANIZADOR
+  FUNCIONARIO
+}
+
+enum TicketStatus {
+  DISPONIVEL
+  RESERVADO
+  VENDIDO
+}
+
+enum OrderStatus {
+  PENDENTE
+  PAGO
+  CANCELADO
 }
