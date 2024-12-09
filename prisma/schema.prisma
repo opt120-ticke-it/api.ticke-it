@@ -19,6 +19,7 @@ model User {
   receivedTransfers   Transfer[] @relation("TransfersDestination")
   orders              Order[]    @relation("UserOrders")
   organizedEvents     Event[]    @relation("OrganizerEvents")
+  sessions Session[] @relation("UserSessions")
 }
 
 model Event {
@@ -82,6 +83,15 @@ model Order {
   user        User     @relation("UserOrders", fields: [userId], references: [id])
   event       Event    @relation(fields: [eventId], references: [id])
   tickets     Ticket[] @relation("OrderTickets")
+}
+
+model Session { 
+  id Int @id @default(autoincrement()) 
+  userId Int 
+  user User @relation("UserSessions", fields: [userId], references: [id]) 
+  token String // Adicionado campo token
+  createdAt DateTime @default(now()) 
+  expiresAt DateTime 
 }
 
 enum UserType {
