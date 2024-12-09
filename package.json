@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
+  "type": "commonjs",
   "scripts": {
     "dev": "ts-node src/index.ts --whatch",
     "clean": "rm -rf node_modules coverage dist .nyc_output",
@@ -22,15 +23,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.10.1",
     "prisma": "^6.0.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@prisma/client": "^6.0.1",
     "@types/express": "^5.0.0",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
     "ts-node": "^10.9.2",
     "zod": "^3.23.8"
   }
