@@ -7,6 +7,6 @@ export const register = async (req: Request, res: Response) => {
     res.status(201).json(user);
   } catch (error: any) {
     const e = error as Error;
-    res.status(401).json({ error: e.message });
+    res.status(401).json(e.message);
   }
 };
