@@ -1,0 +1,22 @@
+meta {
+  name: create event
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/event
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "SLS SUPER CROWN",
+    "description": "Raysa leal vai ta colando",
+    "startDate": "2024-12-14T00:44:32.861Z",
+    "endDate": "2024-12-13T00:44:32.861Z",
+    "location": "Ginasio do ibirapuera",
+    "organizerId": 1
+  }
+}

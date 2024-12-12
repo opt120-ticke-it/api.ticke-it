@@ -1,0 +1,20 @@
+meta {
+  name: create user
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/user/registrar
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "teste@teste.com",
+    "name": "Vitor",
+    "password": "123123",
+    "userType": "ORGANIZADOR"
+  }
+}

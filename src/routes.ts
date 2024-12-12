@@ -7,6 +7,6 @@ const appRoutes = Router();
 
 appRoutes.use('/auth', authRoutes);
 appRoutes.use('/user', userRoutes);
-appRoutes.use('/avent', eventRoutes);
+appRoutes.use('/event', eventRoutes);
 
 export default appRoutes;

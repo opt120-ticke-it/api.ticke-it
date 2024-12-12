@@ -14,10 +14,24 @@ export const CreateEventSchema = z.object({
 export type IUpdateEvent = z.infer<typeof UpdateEventSchema>;
 
 export const UpdateEventSchema = z.object({
+  id: z.number(),
   name: z.string().min(3).optional(),
   description: z.string().min(3).optional(),
   startDate: z.string().min(3).optional(),
   endDate: z.string().min(3).optional(),
   location: z.string().min(3).optional(),
   organizerId: z.number().optional(),
+});
+
+export type IGetAllEvents = z.infer<typeof GetAllEventsSchema>;
+
+export const GetAllEventsSchema = z.object({
+  page: z.number().optional().default(1),
+  limit: z.number().optional().default(10),
+});
+
+export type IGetByIdEvent = z.infer<typeof GetByIdEventSchema>;
+
+export const GetByIdEventSchema = z.object({
+  id: z.number(),
 });
