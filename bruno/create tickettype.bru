@@ -1,0 +1,20 @@
+meta {
+  name: create tickettype
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/ticketTypes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Cadeira Superio Inteira - LOTE 1",
+    "price": 180,
+    "totalQuantity": 100,
+    "eventId": 1
+  }
+}
