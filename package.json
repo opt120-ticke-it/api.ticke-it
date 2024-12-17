@@ -16,9 +16,6 @@
     "prisma:studio": "npx prisma studio",
     "check:types": "tsc --noEmit"
   },
-  "prisma": {
-    "seed": "ts-node-dev -r tsconfig-paths/register --transpile-only prisma/seed.ts"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

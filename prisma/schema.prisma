@@ -13,7 +13,6 @@ model User {
   email             String     @unique
   password          String
   createdAt         DateTime   @default(now())
-  userType          UserType
   tickets           Ticket[]   @relation("UserTickets")
   transfers         Transfer[] @relation("TransfersOrigin")
   receivedTransfers Transfer[] @relation("TransfersDestination")
@@ -94,12 +93,6 @@ model Session {
   token     String // Adicionado campo token
   createdAt DateTime @default(now())
   expiresAt DateTime
-}
-
-enum UserType {
-  CLIENTE
-  ORGANIZADOR
-  FUNCIONARIO
 }
 
 enum TicketStatus {

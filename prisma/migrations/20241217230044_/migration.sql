@@ -1,7 +1,4 @@
 -- CreateEnum
-CREATE TYPE "UserType" AS ENUM ('CLIENTE', 'ORGANIZADOR', 'FUNCIONARIO');
-
--- CreateEnum
 CREATE TYPE "TicketStatus" AS ENUM ('DISPONIVEL', 'RESERVADO', 'VENDIDO');
 
 -- CreateEnum
@@ -14,7 +11,6 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "userType" "UserType" NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -29,6 +25,8 @@ CREATE TABLE "Event" (
     "location" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "organizerId" INTEGER NOT NULL,
+    "image4x3" TEXT,
+    "image16x9" TEXT,
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );
