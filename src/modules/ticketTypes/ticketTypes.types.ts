@@ -15,3 +15,10 @@ export const AddTicketQuantitySchema = z.object({
 });
 
 export type IAddTicketQuantity = z.infer<typeof AddTicketQuantitySchema>;
+
+export const RemoveTicketQuantitySchema = z.object({
+  quantity: z.number().positive(),
+  ticketTypeId: z.number(),
+});
+
+export type IRemoveTicketQuantity = z.infer<typeof RemoveTicketQuantitySchema>;
