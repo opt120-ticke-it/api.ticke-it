@@ -1,14 +1,11 @@
-import prisma from '../../config/prisma';
-import { hashPassword } from '../../utils/hash';
+import prisma from '../../../config/prisma';
+import { hashPassword } from '../../../utils/hash';
+import { RegisterUserSchema, IRegisterUser } from '../user.validation';
 
-interface RegisterInput {
-  name: string;
-  email: string;
-  password: string;
-}
+export const register = async (input: IRegisterUser) => {
+  const data = RegisterUserSchema.parse(input);
 
-export const register = async (input: RegisterInput) => {
-  const { name, email, password } = input;
+  const { name, email, password } = data;
 
   const existingUser = await prisma.user.findUnique({
     where: { email },
