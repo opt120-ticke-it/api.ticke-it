@@ -30,11 +30,11 @@ model Event {
   location    String
   createdAt   DateTime     @default(now())
   organizerId Int
-  image4x3    String?
-  image16x9   String?
+  categoryId  Int
   organizer   User         @relation("OrganizerEvents", fields: [organizerId], references: [id])
   tickets     Ticket[]     @relation("EventTickets")
   orders      Order[]
+  category    Category     @relation(fields: [categoryId], references: [id])
   ticketTypes TicketType[] @relation("EventTicketTypes")
 }
 
@@ -94,6 +94,12 @@ model Session {
   token     String // Adicionado campo token
   createdAt DateTime @default(now())
   expiresAt DateTime
+}
+
+model Category { 
+  id        Int      @id @default(autoincrement()) 
+  name String 
+  events Event[]  
 }
 
 enum TicketStatus {
