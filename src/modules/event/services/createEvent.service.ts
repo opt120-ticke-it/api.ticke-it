@@ -1,4 +1,5 @@
-import primsa from '../../../config/prisma';
+import prisma from '../../../config/prisma';
+import CreateTicketTypesService from '../../ticketTypes/services/CreateTicketTypes.service';
 import { ICreateEvent } from '../event.validation';
 
 class CreateEventService {
@@ -9,13 +10,29 @@ class CreateEventService {
       );
     }
 
-    const res = primsa.event.create({
+    const event = await prisma.event.create({
       data: {
-        ...data,
+        description: data.description,
+        startDate: data.startDate,
+        endDate: data.endDate,
+        location: data.location,
+        name: data.name,
+        organizerId: data.organizerId,
       },
     });
 
-    return res;
+    if (data.ticketTypes) {
+      data.ticketTypes.map((ticketType) => {
+        CreateTicketTypesService.execute({
+          name: ticketType.name,
+          eventId: event.id,
+          totalQuantity: ticketType.totalQuantity,
+          price: ticketType.price,
+        });
+      });
+    }
+
+    return event;
   }
 }
 

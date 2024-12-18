@@ -9,6 +9,15 @@ export const CreateEventSchema = z.object({
   endDate: z.string().min(3),
   location: z.string().min(3),
   organizerId: z.number(),
+  ticketTypes: z
+    .array(
+      z.object({
+        name: z.string().min(3),
+        price: z.number().positive(),
+        totalQuantity: z.number().positive(),
+      })
+    )
+    .optional(),
 });
 
 export type IUpdateEvent = z.infer<typeof UpdateEventSchema>;
