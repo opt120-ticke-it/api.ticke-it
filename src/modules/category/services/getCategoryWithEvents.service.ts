@@ -1,11 +1,14 @@
 import prisma from '../../../config/prisma';
 import { IGetByIdCategory } from '../category.validation';
 
-class GetByIdCategoryService {
+class GetCategoryWithEventsService {
   async execute(data: IGetByIdCategory) {
     const category = await prisma.category.findUnique({
       where: {
         id: data.id,
+      },
+      include: {
+        events: true,
       },
     });
 
@@ -13,4 +16,4 @@ class GetByIdCategoryService {
   }
 }
 
-export default new GetByIdCategoryService();
+export default new GetCategoryWithEventsService();

@@ -98,8 +98,8 @@ model Session {
 
 model Category { 
   id        Int      @id @default(autoincrement()) 
-  name String 
-  events Event[]  
+  name      String   @unique
+  events    Event[]  
 }
 
 enum TicketStatus {
