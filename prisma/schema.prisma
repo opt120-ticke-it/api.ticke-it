@@ -54,14 +54,15 @@ model Ticket {
 }
 
 model TicketType {
-  id                Int      @id @default(autoincrement())
+  id                Int       @id @default(autoincrement())
   name              String
   totalQuantity     Int
   availableQuantity Int
   price             Float
   eventId           Int
-  event             Event    @relation("EventTicketTypes", fields: [eventId], references: [id])
-  tickets           Ticket[] @relation("TicketTypeTickets")
+  event             Event     @relation("EventTicketTypes", fields: [eventId], references: [id])
+  tickets           Ticket[]  @relation("TicketTypeTickets")
+  deletedAt         DateTime?
 }
 
 model Transfer {

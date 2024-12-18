@@ -1,13 +1,17 @@
 meta {
-  name: create event
+  name: ticketTypes
   type: http
-  seq: 1
+  seq: 2
 }
 
-post {
-  url: http://localhost:3000/event
-  body: json
+get {
+  url: http://localhost:3000/event/1/ticketTypes
+  body: none
   auth: none
+}
+
+params:query {
+  : 
 }
 
 body:json {
