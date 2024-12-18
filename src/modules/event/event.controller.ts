@@ -77,6 +77,18 @@ class EventController {
       return res.status(400).json(error.message);
     }
   }
+
+  async updateImage(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const file = req.file;
+
+      return res.status(200).json({ id, file });
+    } catch (error: any) {
+      console.log(error);
+      return res.status(400).json(error.message);
+    }
+  }
 }
 
 export default new EventController();
