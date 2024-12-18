@@ -1,0 +1,18 @@
+meta {
+  name: addQuantity
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:3000/ticketTypes/1/addQuantity
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "quantity": 30,
+    "id": 1
+  }
+}

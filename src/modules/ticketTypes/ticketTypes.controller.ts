@@ -1,9 +1,11 @@
 import AddQuantityTicketTypesService from './services/AddQuantityTicketTypes.service';
 import CreateTicketTypesService from './services/CreateTicketTypes.service';
+import GetByIdTicketTypeService from './services/GetByIdTicketType.service';
 import RemoveQuantityTicketTypesService from './services/RemoveQuantityTicketTypes.service';
 import {
   AddTicketQuantitySchema,
   CreateTicketTypesSchema,
+  GetByIdTicketTypeSchema,
   RemoveTicketQuantitySchema,
 } from './ticketTypes.types';
 import { Request, Response } from 'express';
@@ -16,6 +18,20 @@ class TicketTypesController {
       const response = await CreateTicketTypesService.execute(data);
 
       return res.status(201).json(response);
+    } catch (error: any) {
+      console.log(error);
+      return res.status(400).json(error.message);
+    }
+  }
+
+  async getById(req: Request, res: Response) {
+    try {
+      console.log(req.params);
+      const data = GetByIdTicketTypeSchema.parse(req.params);
+
+      const response = await GetByIdTicketTypeService.execute(data);
+
+      return res.status(200).json(response);
     } catch (error: any) {
       console.log(error);
       return res.status(400).json(error.message);

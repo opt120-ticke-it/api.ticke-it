@@ -1,0 +1,18 @@
+meta {
+  name: removeQuantity
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/ticketTypes/1/removeQuantity
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "quantity":15,
+    "id": 1
+  }
+}

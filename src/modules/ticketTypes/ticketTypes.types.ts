@@ -11,14 +11,20 @@ export type ICreateTicketTypes = z.infer<typeof CreateTicketTypesSchema>;
 
 export const AddTicketQuantitySchema = z.object({
   quantity: z.number().positive(),
-  ticketTypeId: z.number(),
+  id: z.number(),
 });
 
 export type IAddTicketQuantity = z.infer<typeof AddTicketQuantitySchema>;
 
 export const RemoveTicketQuantitySchema = z.object({
   quantity: z.number().positive(),
-  ticketTypeId: z.number(),
+  id: z.number(),
 });
 
 export type IRemoveTicketQuantity = z.infer<typeof RemoveTicketQuantitySchema>;
+
+export const GetByIdTicketTypeSchema = z.object({
+  id: z.coerce.number(),
+});
+
+export type IGetByIdTicketTypeSchema = z.infer<typeof GetByIdTicketTypeSchema>;

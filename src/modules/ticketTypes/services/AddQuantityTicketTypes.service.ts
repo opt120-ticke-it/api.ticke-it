@@ -5,14 +5,14 @@ class AddQuantityTicketTypesService {
   async execute(data: IAddTicketQuantity) {
     const ticketType = await prisma.ticketType.findUnique({
       where: {
-        id: data.ticketTypeId,
+        id: data.id,
       },
     });
     if (!ticketType) throw new Error('Ingresso não encontrado');
 
     return await prisma.ticketType.update({
       where: {
-        id: data.ticketTypeId,
+        id: data.id,
       },
       data: {
         totalQuantity: ticketType.totalQuantity + data.quantity,
