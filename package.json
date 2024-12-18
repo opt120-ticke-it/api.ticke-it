@@ -14,7 +14,8 @@
     "prisma:migrate": "npx prisma migrate dev --name init",
     "prisma:seed": "npx prisma db seed",
     "prisma:studio": "npx prisma studio",
-    "check:types": "tsc --noEmit"
+    "check:types": "tsc --noEmit",
+    "seed:categories": "ts-node scripts/seedCategories.ts"  
   },
   "keywords": [],
   "author": "",
