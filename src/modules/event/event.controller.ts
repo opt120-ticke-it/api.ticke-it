@@ -3,12 +3,14 @@ import {
   CreateEventSchema,
   GetAllEventsSchema,
   GetByIdEventSchema,
+  GetEventTicketTypesSchema,
   UpdateEventSchema,
 } from './event.validation';
 import CreateEventService from './services/createEvent.service';
 import updateEventService from './services/updateEvent.service';
 import getAllEventService from './services/getAllEvent.service';
 import getByIdEventService from './services/getByIdEvent.service';
+import GetEventTicketTypesService from './services/GetEventTicketTypes.service';
 
 class EventController {
   async create(req: Request, res: Response) {
@@ -55,6 +57,19 @@ class EventController {
       const data = GetByIdEventSchema.parse(req.params);
 
       const response = await getByIdEventService.execute(data);
+
+      return res.status(200).json(response);
+    } catch (error: any) {
+      console.log(error);
+      return res.status(400).json(error.message);
+    }
+  }
+
+  async getTicketTypes(req: Request, res: Response) {
+    try {
+      const data = GetEventTicketTypesSchema.parse(req.params);
+
+      const response = await GetEventTicketTypesService.execute(data);
 
       return res.status(200).json(response);
     } catch (error: any) {
