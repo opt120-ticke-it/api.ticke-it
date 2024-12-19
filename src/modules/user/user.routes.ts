@@ -8,5 +8,6 @@ userRoutes.get('/', userController.list);
 userRoutes.get('/:id', userController.show);
 userRoutes.patch('/:id', userController.update);
 userRoutes.delete('/:id', userController.deleteUser);
+userRoutes.get('/:id/events', userController.getUserEvents);
 
 export default userRoutes;

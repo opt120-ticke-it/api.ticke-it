@@ -15,7 +15,8 @@
     "prisma:seed": "npx prisma db seed",
     "prisma:studio": "npx prisma studio",
     "check:types": "tsc --noEmit",
-    "seed:categories": "ts-node scripts/seedCategories.ts"  
+    "seed:categories": "ts-node scripts/seedCategories.ts",
+    "seed:data": "ts-node scripts/seedData.ts"
   },
   "keywords": [],
   "author": "",

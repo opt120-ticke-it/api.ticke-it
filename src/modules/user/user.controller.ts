@@ -4,6 +4,7 @@ import getAllUsersService from './services/getAllUsers.service';
 import getByIdUserService from './services/getByIdUser.service';
 import updateUserService from './services/updateUser.service';
 import deleteUserService from './services/deleteUser.service';
+import getUserEventsService from './services/getUserEvents.service';
 import { GetByIdUserSchema, GetAllUsersSchema, UpdateUserSchema, RegisterUserSchema } from './user.validation';
 
 export const register = async (req: Request, res: Response) => {
@@ -68,4 +69,19 @@ export const deleteUser = async (req: Request, res: Response) => {
     console.log(error);
     return res.status(400).json(error.message);
   }
+};
+
+export const getUserEvents = async (req: Request, res: Response) => { 
+  try { 
+    const id = Number(req.params.id); 
+    if (isNaN(id)) { 
+      throw new Error('Invalid id format.'); 
+    } 
+    const data = GetByIdUserSchema.parse({ id }); 
+    const response = await getUserEventsService.execute(data); 
+    return res.status(200).json(response); 
+  } catch (error: any) { 
+    console.log(error); 
+    return res.status(400).json(error.message); 
+  } 
 };
