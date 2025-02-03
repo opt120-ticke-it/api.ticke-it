@@ -18,6 +18,7 @@ export const CreateEventSchema = z.object({
       })
     )
     .optional(),
+  categoryId: z.number(),
 });
 
 export type IUpdateEvent = z.infer<typeof UpdateEventSchema>;

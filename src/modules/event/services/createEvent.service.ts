@@ -18,6 +18,7 @@ class CreateEventService {
         location: data.location,
         name: data.name,
         organizerId: data.organizerId,
+        categoryId: data.categoryId,
       },
     });
 
