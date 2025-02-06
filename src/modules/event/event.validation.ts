@@ -43,7 +43,7 @@ export const GetAllEventsSchema = z.object({
 export type IGetByIdEvent = z.infer<typeof GetByIdEventSchema>;
 
 export const GetByIdEventSchema = z.object({
-  id: z.number(),
+   id: z.coerce.number(),
 });
 
 export const GetEventTicketTypesSchema = z.object({
