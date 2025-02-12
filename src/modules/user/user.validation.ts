@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { date, z } from 'zod';
 
 export type IRegisterUser = z.infer<typeof RegisterUserSchema>;
 
@@ -6,6 +6,9 @@ export const RegisterUserSchema = z.object({
   name: z.string().min(3),
   email: z.string().email(),
   password: z.string().min(6),
+  cpf: z.string().length(14),
+  birthDate: z.string(),
+  gender: z.string(),
 });
 
 export type IUpdateUser = z.infer<typeof UpdateUserSchema>;

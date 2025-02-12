@@ -9,6 +9,7 @@ export const CreateEventSchema = z.object({
   endDate: z.string().min(3),
   location: z.string().min(3),
   organizerId: z.number(),
+  categoryId: z.number(),
   ticketTypes: z
     .array(
       z.object({
@@ -18,7 +19,8 @@ export const CreateEventSchema = z.object({
       })
     )
     .optional(),
-  categoryId: z.number(),
+  image4x3: z.string().optional(),
+  image16x9: z.string().optional(),
 });
 
 export type IUpdateEvent = z.infer<typeof UpdateEventSchema>;
@@ -31,6 +33,9 @@ export const UpdateEventSchema = z.object({
   endDate: z.string().min(3).optional(),
   location: z.string().min(3).optional(),
   organizerId: z.number().optional(),
+  categoryId: z.number().optional(),
+  image4x3: z.string().optional(),
+  image16x9: z.string().optional(),
 });
 
 export type IGetAllEvents = z.infer<typeof GetAllEventsSchema>;
@@ -43,7 +48,7 @@ export const GetAllEventsSchema = z.object({
 export type IGetByIdEvent = z.infer<typeof GetByIdEventSchema>;
 
 export const GetByIdEventSchema = z.object({
-  id: z.number(),
+  id: z.coerce.number(),
 });
 
 export const GetEventTicketTypesSchema = z.object({

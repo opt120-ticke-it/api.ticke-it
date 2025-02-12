@@ -11,6 +11,7 @@ import getAllCategoriesService from './services/getAllCategories.service';
 import updateCategoryService from './services/updateCategory.service';
 import deleteCategoryService from './services/deleteCategory.service';
 import getCategoryWithEventsService from './services/getCategoryWithEvents.service';
+import getCategoryWithMoreEventsService from './services/getCategoryWithMoreEventsService';
 
 class CategoryController {
   async create(req: Request, res: Response) {
@@ -83,6 +84,17 @@ class CategoryController {
       const data = GetByIdCategorySchema.parse({ id: Number(req.params.id) });
 
       const response = await getCategoryWithEventsService.execute(data);
+
+      return res.status(200).json(response);
+    } catch (error: any) {
+      console.log(error);
+      return res.status(400).json(error.message);
+    }
+  }
+
+  async getCategoriesWithMoreEvents(req: Request, res: Response) {
+    try {
+      const response = await getCategoryWithMoreEventsService.execute();
 
       return res.status(200).json(response);
     } catch (error: any) {

@@ -6,6 +6,12 @@ async function main() {
   const categories = [
     { name: 'Festa' },
     { name: 'Show' },
+    { name: 'Workshop' },
+    { name: 'Palestra' },
+    { name: 'Concerto' },
+    { name: 'Teatro' },
+    { name: 'Exposição' },
+    { name: 'Feira' },
   ];
 
   for (const category of categories) {

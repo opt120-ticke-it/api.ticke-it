@@ -26,7 +26,6 @@ class TicketTypesController {
 
   async getById(req: Request, res: Response) {
     try {
-      console.log(req.params);
       const data = GetByIdTicketTypeSchema.parse(req.params);
 
       const response = await GetByIdTicketTypeService.execute(data);
