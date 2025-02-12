@@ -4,7 +4,11 @@ class GetCategoryWithMoreEventsService {
   async execute() {
     const categories = await prisma.category.findMany({
       include: {
-        events: true,
+        events: {
+          include: {
+            images: true,
+          },
+        },
       },
       orderBy: {
         events: {

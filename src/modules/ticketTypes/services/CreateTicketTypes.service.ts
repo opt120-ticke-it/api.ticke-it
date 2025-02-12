@@ -1,7 +1,7 @@
 import prisma from '../../../config/prisma';
 import { ICreateTicketTypes } from '../ticketTypes.types';
 
-class CreateTicketTypeService {
+class CreateTicketTypesService {
   async execute(data: ICreateTicketTypes) {
     const prevTicketType = await prisma.ticketType.findFirst({
       where: {
@@ -23,4 +23,4 @@ class CreateTicketTypeService {
   }
 }
 
-export default new CreateTicketTypeService();
+export default new CreateTicketTypesService();

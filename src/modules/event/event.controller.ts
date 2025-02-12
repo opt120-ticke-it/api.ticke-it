@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import prisma from '../../config/prisma';
 import {
   CreateEventSchema,
   GetAllEventsSchema,
@@ -13,16 +14,20 @@ import getByIdEventService from './services/getByIdEvent.service';
 import GetEventTicketTypesService from './services/GetEventTicketTypes.service';
 
 class EventController {
-  async create(req: Request, res: Response) {
+  async createEvent(req: Request, res: Response) {
     try {
-      const data = CreateEventSchema.parse(req.body);
-
-      const response = await CreateEventService.execute(data);
-
-      return res.status(201).json(response);
+      const eventData = {
+        ...req.body,
+        startDate: new Date(req.body.startDate).toISOString(),
+        endDate: new Date(req.body.endDate).toISOString(),
+      };
+  
+      const event = await CreateEventService.execute(eventData);
+  
+      return res.status(201).json(event);
     } catch (error: any) {
       console.log(error);
-      return res.status(400).json(error.message);
+      return res.status(400).json({ message: error.message });
     }
   }
 
@@ -54,10 +59,12 @@ class EventController {
 
   async show(req: Request, res: Response) {
     try {
-      const data = GetByIdEventSchema.parse(req.params);
-
+      const data = GetByIdEventSchema.parse({
+        id: Number(req.params.id),
+      });
+  
       const response = await getByIdEventService.execute(data);
-
+  
       return res.status(200).json(response);
     } catch (error: any) {
       console.log(error);

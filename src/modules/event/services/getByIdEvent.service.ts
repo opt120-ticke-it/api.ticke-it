@@ -1,11 +1,15 @@
-import primsa from '../../../config/prisma';
+import prisma from '../../../config/prisma';
 import { IGetByIdEvent } from '../event.validation';
 
 class GetByIdEventService {
   async execute(data: IGetByIdEvent) {
-    const event = primsa.event.findUnique({
+    const event = await prisma.event.findUnique({
       where: {
         id: data.id,
+      },
+      include: {
+        ticketTypes: true,
+        images: true,
       },
     });
 
