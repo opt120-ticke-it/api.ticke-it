@@ -17,7 +17,17 @@ export const UpdateUserSchema = z.object({
   id: z.number(),
   name: z.string().min(3).optional(),
   email: z.string().email().optional(),
+  gender: z.string().optional(),
   password: z.string().min(6).optional(),
+  oldPassword: z.string().min(6).optional(),
+}).refine((data) => {
+  if (data.password) {
+    return data.oldPassword;
+  }
+  return true;
+}, {
+  message: "oldPassword é obrigatório quando password está presente",
+  path: ["oldPassword"],
 });
 
 export type IGetAllUsers = z.infer<typeof GetAllUsersSchema>;
