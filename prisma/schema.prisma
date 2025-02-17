@@ -43,26 +43,28 @@ model Event {
 }
 
 model Image {
-  id        Int    @id @default(autoincrement())
-  eventId   Int
-  event     Event  @relation(fields: [eventId], references: [id])
-  type      String
-  base64    String
+  id      Int    @id @default(autoincrement())
+  eventId Int
+  event   Event  @relation(fields: [eventId], references: [id])
+  type    String
+  base64  String
 }
 
 model Ticket {
-  id           Int          @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   qrCode       String
-  status       TicketStatus
   ticketTypeId Int
   orderId      Int?
   userId       Int
   eventId      Int?
-  user         User         @relation("UserTickets", fields: [userId], references: [id])
-  event        Event?       @relation("EventTickets", fields: [eventId], references: [id])
-  order        Order?       @relation("OrderTickets", fields: [orderId], references: [id])
-  ticketType   TicketType   @relation("TicketTypeTickets", fields: [ticketTypeId], references: [id])
-  transfers    Transfer[]   @relation("TicketTransfers")
+  validated    Boolean
+  validatedAt  DateTime?
+  validatedBy  Int?
+  user         User       @relation("UserTickets", fields: [userId], references: [id])
+  event        Event?     @relation("EventTickets", fields: [eventId], references: [id])
+  order        Order?     @relation("OrderTickets", fields: [orderId], references: [id])
+  ticketType   TicketType @relation("TicketTypeTickets", fields: [ticketTypeId], references: [id])
+  transfers    Transfer[] @relation("TicketTransfers")
 }
 
 model TicketType {
@@ -108,10 +110,10 @@ model Session {
   expiresAt DateTime
 }
 
-model Category { 
-  id        Int      @id @default(autoincrement()) 
-  name      String   @unique
-  events    Event[]  
+model Category {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  events Event[]
 }
 
 enum TicketStatus {
