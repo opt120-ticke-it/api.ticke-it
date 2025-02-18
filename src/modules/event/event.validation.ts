@@ -26,16 +26,25 @@ export const CreateEventSchema = z.object({
 export type IUpdateEvent = z.infer<typeof UpdateEventSchema>;
 
 export const UpdateEventSchema = z.object({
-  id: z.number(),
+  id: z.coerce.number(),
   name: z.string().min(3).optional(),
   description: z.string().min(3).optional(),
-  startDate: z.string().min(3).optional(),
-  endDate: z.string().min(3).optional(),
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
   location: z.string().min(3).optional(),
   organizerId: z.number().optional(),
   categoryId: z.number().optional(),
   image4x3: z.string().optional(),
   image16x9: z.string().optional(),
+  ticketTypes: z
+    .array(
+      z.object({
+        name: z.string().min(3),
+        price: z.number().positive(),
+        totalQuantity: z.number().positive(),
+      })
+    )
+    .optional(),
 });
 
 export type IGetAllEvents = z.infer<typeof GetAllEventsSchema>;

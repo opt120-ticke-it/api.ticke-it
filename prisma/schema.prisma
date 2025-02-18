@@ -43,11 +43,13 @@ model Event {
 }
 
 model Image {
-  id      Int    @id @default(autoincrement())
-  eventId Int
-  event   Event  @relation(fields: [eventId], references: [id])
-  type    String
-  base64  String
+  id        Int    @id @default(autoincrement())
+  eventId   Int
+  event     Event  @relation(fields: [eventId], references: [id])
+  type      String
+  base64    String
+
+  @@unique([eventId, type])
 }
 
 model Ticket {
