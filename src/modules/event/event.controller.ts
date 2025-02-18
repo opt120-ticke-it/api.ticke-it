@@ -33,14 +33,19 @@ class EventController {
 
   async update(req: Request, res: Response) {
     try {
-      const data = UpdateEventSchema.parse({ ...req.body, id: req.params.id });
+      const data = UpdateEventSchema.parse({
+        ...req.body,
+        id: Number(req.body.id),
+        startDate: req.body.startDate ? new Date(req.body.startDate).toISOString() : undefined,
+        endDate: req.body.endDate ? new Date(req.body.endDate).toISOString() : undefined,
+      });
 
       const response = await updateEventService.execute(data);
 
       return res.status(200).json(response);
     } catch (error: any) {
       console.log(error);
-      return res.status(400).json(error.message);
+      return res.status(400).json({ message: error.message });
     }
   }
 

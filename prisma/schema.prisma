@@ -48,6 +48,8 @@ model Image {
   event     Event  @relation(fields: [eventId], references: [id])
   type      String
   base64    String
+
+  @@unique([eventId, type])
 }
 
 model Ticket {
