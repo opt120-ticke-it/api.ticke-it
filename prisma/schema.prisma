@@ -57,7 +57,8 @@ model Ticket {
   orderId      Int?
   userId       Int
   eventId      Int?
-  validated    Boolean
+  status       String     @default("DISPONÍVEL")
+  validated    Boolean    @default(false)
   validatedAt  DateTime?
   validatedBy  Int?
   user         User       @relation("UserTickets", fields: [userId], references: [id])

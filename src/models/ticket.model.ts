@@ -12,5 +12,7 @@ export enum TicketStatus {
     orderId: number;
     userId: number;
     eventId: number;
+    validated: boolean;
+    validatesAt: Date | null;
+    validatedBy: number;
   }
-  
