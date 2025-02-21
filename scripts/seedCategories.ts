@@ -6,7 +6,7 @@ async function main() {
   const categories = [
     { name: 'Festa' },
     { name: 'Show' },
-    { name: 'Workshop' },
+    { name: 'Stand-Up' },
     { name: 'Palestra' },
     { name: 'Concerto' },
     { name: 'Teatro' },
