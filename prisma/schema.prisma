@@ -54,12 +54,12 @@ model Image {
 
 model Ticket {
   id           Int        @id @default(autoincrement())
-  qrCode       String
+  qrCode       String     @unique
   ticketTypeId Int
   orderId      Int?
   userId       Int
   eventId      Int?
-  validated    Boolean
+  validated    Boolean    @default(false)
   validatedAt  DateTime?
   validatedBy  Int?
   user         User       @relation("UserTickets", fields: [userId], references: [id])
