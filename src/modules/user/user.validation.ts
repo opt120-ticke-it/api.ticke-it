@@ -32,10 +32,7 @@ export const UpdateUserSchema = z.object({
 
 export type IGetAllUsers = z.infer<typeof GetAllUsersSchema>;
 
-export const GetAllUsersSchema = z.object({
-  page: z.number().optional().default(1),
-  limit: z.number().optional().default(10),
-});
+export const GetAllUsersSchema = z.object({});
 
 export type IGetByIdUser = z.infer<typeof GetByIdUserSchema>;
 

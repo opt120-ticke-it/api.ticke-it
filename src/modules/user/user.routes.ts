@@ -5,7 +5,7 @@ const userRoutes = Router();
 
 /**
  * @swagger
- * /users/registrar:
+ * /user/registrar:
  *   post:
  *     summary: Cria um novo usuário.
  *     tags: [User]
@@ -69,7 +69,7 @@ userRoutes.post('/registrar', userController.register);
 
 /**
  * @swagger
- * /users:
+ * /user/:
  *   get:
  *     summary: Lista todos os usuários.
  *     tags: [User]
@@ -109,7 +109,7 @@ userRoutes.get('/', userController.list);
 
 /**
  * @swagger
- * /users/{id}:
+ * /user/{id}:
  *   get:
  *     summary: Retorna um usuário pelo ID.
  *     tags: [User]
@@ -154,7 +154,7 @@ userRoutes.get('/:id', userController.show);
 
 /**
  * @swagger
- * /users/{id}:
+ * /user/{id}:
  *   patch:
  *     summary: Atualiza um usuário pelo ID.
  *     tags: [User]
@@ -181,6 +181,9 @@ userRoutes.get('/:id', userController.show);
  *               password:
  *                 type: string
  *                 example: "nova_senha123"
+ *               oldPassword:
+ *                 type: string
+ *                 example: "senha123"
  *               cpf:
  *                 type: string
  *                 example: "123.456.789-01"
@@ -225,7 +228,7 @@ userRoutes.patch('/:id', userController.update);
 
 /**
  * @swagger
- * /users/{id}:
+ * /user/{id}:
  *   delete:
  *     summary: Deleta um usuário pelo ID.
  *     tags: [User]
@@ -270,7 +273,7 @@ userRoutes.delete('/:id', userController.deleteUser);
 
 /**
  * @swagger
- * /users/{id}/events:
+ * /user/{id}/events:
  *   get:
  *     summary: Retorna os eventos de um usuário pelo ID.
  *     tags: [User]
@@ -321,5 +324,101 @@ userRoutes.delete('/:id', userController.deleteUser);
  *         description: Erro ao buscar os eventos.
  */
 userRoutes.get('/:id/events', userController.getUserEvents);
+
+/**
+ * @swagger
+ * /user/{id}/tickets:
+ *   get:
+ *     summary: Retorna os ingressos de um usuário pelo ID.
+ *     tags: [User]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Uma lista de ingressos.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     example: 1
+ *                   qrCode:
+ *                     type: string
+ *                     example: "qrcode123"
+ *                   status:
+ *                     type: string
+ *                     example: "DISPONIVEL"
+ *                   ticketTypeId:
+ *                     type: integer
+ *                     example: 1
+ *                   orderId:
+ *                     type: integer
+ *                     example: 1
+ *                   userId:
+ *                     type: integer
+ *                     example: 1
+ *                   eventId:
+ *                     type: integer
+ *                     example: 1
+ *                   event:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       name:
+ *                         type: string
+ *                         example: "Evento Teste"
+ *                       description:
+ *                         type: string
+ *                         example: "Descrição do evento"
+ *                       startDate:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2025-01-01T20:00:00.000Z"
+ *                       endDate:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2025-01-02T02:00:00.000Z"
+ *                       location:
+ *                         type: string
+ *                         example: "Localização do evento"
+ *                       organizerId:
+ *                         type: integer
+ *                         example: 1
+ *                       categoryId:
+ *                         type: integer
+ *                         example: 1
+ *                   ticketType:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       name:
+ *                         type: string
+ *                         example: "Ingresso Padrão"
+ *                       price:
+ *                         type: number
+ *                         example: 100
+ *                       totalQuantity:
+ *                         type: integer
+ *                         example: 100
+ *                       availableQuantity:
+ *                         type: integer
+ *                         example: 100
+ *       400:
+ *         description: Erro ao buscar os ingressos.
+ */
+userRoutes.get('/:id/tickets', userController.getUserTickets);
 
 export default userRoutes;
