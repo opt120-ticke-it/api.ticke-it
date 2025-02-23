@@ -16,6 +16,10 @@ class ValidateTicketServiceV1 {
       );
     }
 
+    if (ticketExists.validated) {
+      throw new Error('Este ticket já foi validado');
+    }
+
     await prisma.ticket.update({
       where: {
         id: ticketExists.id,
