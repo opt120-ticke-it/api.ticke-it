@@ -13,10 +13,6 @@ export default class TransferTicketService {
       throw new Error('Usuário não possui este ticket.');
     }
 
-    if (ticket.status !== 'VENDIDO') {
-      throw new Error('Ticket não pode ser transferido, pois não está vendido.');
-    }
-
     if (ticket.validated) {
       throw new Error('Ticket já foi validado e não pode ser transferido.');
     }
