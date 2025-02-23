@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import TicketController from './ticket.controller';
+import { ticketController, transfer, updateTicketController } from './ticket.controller';
 
 const ticketRoutes = Router();
 
-ticketRoutes.post('/', TicketController.create);
-ticketRoutes.post('/validate', TicketController.validate);
+ticketRoutes.post('/', ticketController.create);
+ticketRoutes.put("/:id", updateTicketController);
+ticketRoutes.post('/validate', ticketController.validate);
+ticketRoutes.post('/transfer', transfer);
 
 export default ticketRoutes;
