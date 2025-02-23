@@ -59,6 +59,7 @@ model Ticket {
   orderId      Int?
   userId       Int
   eventId      Int?
+  status       String     @default("DISPONÍVEL")
   validated    Boolean    @default(false)
   validatedAt  DateTime?
   validatedBy  Int?
