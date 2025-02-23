@@ -17,9 +17,13 @@ export const CreateTicketSchema = z.object({
 export type ICreateTicket = z.infer<typeof CreateTicketSchema>;
 
 export const TransferTicketSchema = z.object({
-  originUserId: z.number().positive(),
-  destinationUserId: z.number().positive(),
-  ticketId: z.number().positive(),
+  ticketId: z.number(),
+  originUserId: z.number(),
+  destinationUserCpf: z.string().min(11).max(14),
 });
 
-export type ITransferTicket = z.infer<typeof TransferTicketSchema>;
+export type ITransferTicket = {
+  ticketId: number;
+  originUserId: number;
+  destinationUserId: number;
+};
